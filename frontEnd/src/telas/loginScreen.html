@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mia Dota - Login</title>
+    <style>
+        /* Paleta de Cores Pastéis (Roxo/Lilás) */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f3efff 0%, #e5dbff 100%);
+            --card-bg: #ffffff;
+            --purple-primary: #9c88ff;
+            --purple-hover: #7f57ff;
+            --purple-light: #f1edff;
+            --text-main: #4a4355;
+            --text-muted: #8e8599;
+            --border-color: #e1dbe9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .login-container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 420px;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(156, 136, 255, 0.15);
+        }
+
+        .header-login {
+            text-align: center;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Espaço para a sua Logo */
+        .logo-app {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            /* Suaviza as bordas caso a imagem seja redonda */
+            border-radius: 50%; 
+        }
+
+        .header-login h1 {
+            color: var(--purple-primary);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-login p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Seletor de Perfil (Tabs) */
+        .profile-selector {
+            display: flex;
+            background: var(--purple-light);
+            padding: 0.4rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .profile-btn {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-btn.active {
+            background: var(--card-bg);
+            color: var(--purple-hover);
+            box-shadow: 0 4px 10px rgba(156, 136, 255, 0.1);
+        }
+
+        /* Formulário */
+        .form-group {
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--purple-primary);
+            box-shadow: 0 0 0 4px rgba(156, 136, 255, 0.15);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--purple-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s ease, transform 0.1s ease;
+        }
+
+        .btn-submit:hover {
+            background: var(--purple-hover);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        .footer-login {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-login a {
+            color: var(--purple-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-login a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="header-login">
+            <!-- INSIRA O CAMINHO DA SUA IMAGEM DE LOGO AQUI ABAIXO -->
+            <img src="1ef274206497fe7243acd8c0c03005da.jpeg" alt="Logo Mia Dota" class="logo-app" onerror="this.style.display='none'">
+            
+            <h1>🐾 Mia Dota</h1>
+            <p>Seja bem-vinda de volta!</p>
+        </div>
+
+        <!-- Seletor de Papéis exigido pelo escopo -->
+        <div class="profile-selector">
+            <button type="button" class="profile-btn active" onclick="setRole('ADOTANTE', this)">Adotante</button>
+            <button type="button" class="profile-btn" onclick="setRole('ONG_ADMIN', this)">Gerente ONG</button>
+        </div>
+
+        <form id="loginForm">
+            <!-- Campo oculto para enviar o tipo de perfil selecionado ao backend -->
+            <input type="hidden" id="userRole" value="ADOTANTE">
+
+            <div class="form-group">
+                <label for="email">E-mail / Usuário</label>
+                <input type="text" id="email" placeholder="Digite seu e-mail ou usuário" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="Digite sua senha" required autocomplete="current-password">
+            </div>
+
+            <button type="button" class="btn-submit" onclick="realizarLogin()">Entrar no Sistema</button>
+        </form>
+
+        <div class="footer-login">
+            Não tem uma conta? <a href="cadastro-usuario.html">Cadastre-se aqui</a>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000'; 
+
+        function setRole(role, button) {
+            document.getElementById('userRole').value = role;
+            document.querySelectorAll('.profile-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        async function realizarLogin() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('userRole').value;
+
+            // --- SIMULAÇÃO DE LOGIN RÁPIDO PARA APRESENTAÇÃO ---
+            if (role === 'ADOTANTE' && email === 'normal' && password === '1234') {
+                localStorage.setItem('token', 'mock-jwt-token-adotante');
+                localStorage.setItem('userRole', 'ADOTANTE');
+                localStorage.setItem('userEmail', 'adotante@teste.com');
+                window.location.href = 'vitrineScreen.html';
+                return;
+            }
+
+            if (role === 'ONG_ADMIN' && email === 'ong' && password === 'ong123') {
+                localStorage.setItem('token', 'mock-jwt-token-ong');
+                localStorage.setItem('userRole', 'ONG_ADMIN');
+                localStorage.setItem('userEmail', 'ong@teste.com');
+                window.location.href = 'painel-ong.html';
+                return;
+            }
+            // ----------------------------------------------------
+
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, role })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Falha na autenticação.');
+                }
+
+                const data = await response.json();
+                
+                localStorage.setItem('token', data.accessToken);
+                localStorage.setItem('userRole', role);
+                localStorage.setItem('userEmail', email);
+
+                if (role === 'ONG_ADMIN') {
+                    window.location.href = 'painel-ong.html';
+                } else {
+                    window.location.href = 'vitrineScreen.html';
+                }
+
+            } catch (error) {
+                alert(`Erro: ${error.message}`);
+            }
+        }
+    </script>
+</body>
+</html>

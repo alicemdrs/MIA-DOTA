@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetMatch - Vitrine de Adoção</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f3efff 0%, #e5dbff 100%);
+            --card-bg: #ffffff;
+            --purple-primary: #9c88ff;
+            --purple-hover: #7f57ff;
+            --purple-light: #f1edff;
+            --text-main: #4a4355;
+            --text-muted: #8e8599;
+            --border-color: #e1dbe9;
+            --success: #2ecc71;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fcfbfe;
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* Barra de Navegação */
+        nav {
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(156, 136, 255, 0.08);
+        }
+
+        nav h1 {
+            color: var(--purple-primary);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-primary);
+        }
+
+        .btn-logout {
+            background: var(--purple-light);
+            color: var(--purple-hover);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Conteúdo Principal */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Barra de Filtros (Onde usamos o Cookie de preferência) */
+        .filter-bar {
+            background: var(--card-bg);
+            padding: 1.2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-bar h3 {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        select {
+            padding: 0.6rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            outline: none;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: var(--purple-primary);
+        }
+
+        /* Grid de Animais */
+        .pet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Card do Pet */
+        .pet-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(156, 136, 255, 0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(156, 136, 255, 0.12);
+        }
+
+        .pet-image-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background-color: var(--purple-light);
+        }
+
+        .pet-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pet-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--purple-hover);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pet-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .pet-info h2 {
+            font-size: 1.3rem;
+            color: var(--text-main);
+        }
+
+        .pet-details {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .pet-desc {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            line-height: 1.4;
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        .btn-adopt {
+            margin-top: auto;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--purple-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-adopt:hover {
+            background: var(--purple-hover);
+        }
+
+        /* Modal de Intenção de Adoção */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .modal-content textarea {
+            width: 100%;
+            height: 100px;
+            padding: 0.8rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            resize: none;
+            outline: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content textarea:focus {
+            border-color: var(--purple-primary);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--purple-light);
+            color: var(--purple-hover);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>🐾 Mia Dota</h1>
+        <div class="nav-links">
+            <a href="vitrine.html" style="color: var(--purple-primary);">Vitrine</a>
+            <a href="meus-pedidos.html">Meus Pedidos</a>
+            <button class="btn-logout" onclick="logout()">Sair</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Filtros com captura de Cookie -->
+        <div class="filter-bar">
+            <h3>Filtrar por espécie:</h3>
+            <select id="speciesFilter" onchange="handleFilterChange(this.value)">
+                <option value="TODOS">Todos os bichinhos</option>
+                <option value="Cão">Cães 🐶</option>
+                <option value="Gato">Gatos 🐱</option>
+            </select>
+        </div>
+
+        <!-- Onde a mágica acontece (Lista dinâmica) -->
+        <div id="petGrid" class="pet-grid">
+            <!-- Mocks e dados da API entram aqui -->
+        </div>
+    </main>
+
+    <!-- Modal do Fluxo de Negócio de Adoção -->
+    <div id="adoptModal" class="modal">
+        <div class="modal-content">
+            <h3>Solicitação de Adoção</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                Conte para a ONG por que você deseja adotar o(a) <strong id="modalPetName"></strong>:
+            </p>
+            <textarea id="justificationInput" placeholder="Escreva aqui sua justificativa..."></textarea>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                <button class="btn-confirm" onclick="submitAdoption()">Enviar Pedido</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000';
+        let currentSelectedPetId = null;
+
+        // --- CONTROLE DE COOKIES (Requisito 5.4) ---
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
+        }
+
+        // --- BANCO MOCK (Caso o back não esteja rodando na apresentação) ---
+        const mockPets = [
+            { _id: '1', name: 'Pipoca', species: 'Cão', size: 'PEQUENO', description: 'Muito dócil, adora crianças e brincar com bolinhas.', photoUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500' },
+            { _id: '2', name: 'Mingau', species: 'Gato', size: 'MEDIO', description: 'Calmo, companheiro e adora um colinho no inverno.', photoUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500' }
+        ];
+
+        // --- INICIALIZAÇÃO DA TELA ---
+        window.onload = function() {
+            // Verifica se o usuário salvou alguma preferência de filtro em cookies anteriormente
+            const savedPreference = getCookie('pref_especie');
+            if (savedPreference) {
+                document.getElementById('speciesFilter').value = savedPreference;
+                loadAnimals(savedPreference);
+            } else {
+                loadAnimals('TODOS');
+            }
+        };
+
+        function handleFilterChange(value) {
+            setCookie('pref_especie', value, 7); // Guarda a preferência por 7 dias
+            loadAnimals(value);
+        }
+
+        // --- RENDERIZAR OS ANIMAIS (GET) ---
+        async function loadAnimals(filterValue) {
+            const grid = document.getElementById('petGrid');
+            grid.innerHTML = '<p>Carregando pets fofinhos...</p>';
+
+            let pets = [];
+
+            // Se o token for o Mock do login rápido, usamos a lista estática simulada
+            if (localStorage.getItem('token') === 'mock-jwt-token-adotante') {
+                pets = mockPets;
+            } else {
+                try {
+                    const res = await fetch(`${API_URL}/animals`);
+                    if (res.ok) pets = await res.json();
+                } catch (e) {
+                    // Fallback de segurança para a apresentação não falhar
+                    pets = mockPets;
+                }
+            }
+
+            // Aplica a filtragem na tela
+            if (filterValue !== 'TODOS') {
+                pets = pets.filter(p => p.species.toLowerCase() === filterValue.toLowerCase());
+            }
+
+            grid.innerHTML = '';
+            if(pets.length === 0) {
+                grid.innerHTML = '<p style="color: var(--text-muted)">Nenhum bichinho encontrado nessa categoria.</p>';
+                return;
+            }
+
+            pets.forEach(pet => {
+                grid.innerHTML += `
+                    <div class="pet-card">
+                        <div class="pet-image-container">
+                            <img src="${pet.photoUrl}" alt="${pet.name}">
+                            <span class="pet-badge">${pet.size}</span>
+                        </div>
+                        <div class="pet-info">
+                            <h2>${pet.name}</h2>
+                            <span class="pet-details">🐾 ${pet.species}</span>
+                            <p class="pet-desc">${pet.description}</p>
+                            <button class="btn-adopt" onclick="openModal('${pet._id}', '${pet.name}')">Quero Adotar 💜</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- FLUXO DO MODAL (POST /adoptions) ---
+        function openModal(id, name) {
+            currentSelectedPetId = id;
+            document.getElementById('modalPetName').innerText = name;
+            document.getElementById('adoptModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('adoptModal').style.display = 'none';
+            document.getElementById('justificationInput').value = '';
+        }
+
+        async function submitAdoption() {
+            const justification = document.getElementById('justificationInput').value.trim();
+            if(!justification) return alert('Por favor, digite uma justificativa!');
+
+            const token = localStorage.getItem('token');
+
+            if (token === 'mock-jwt-token-adotante') {
+                alert('Simulação: Pedido enviado com sucesso para a ONG!');
+                closeModal();
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_URL}/adoptions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ animalId: currentSelectedPetId, justification })
+                });
+
+                if(res.ok) {
+                    alert('Pedido de adoção enviado com sucesso!');
+                    closeModal();
+                } else {
+                    const err = await res.json();
+                    alert(`Erro: ${err.message}`);
+                }
+            } catch (e) {
+                alert('Erro de conexão com o servidor.');
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,4 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class HealthService {}
+export class HealthService {
+  check() {
+    return {
+      status: 'ok',
+      message: 'API funcionando corretamente',
+      timestamp: new Date().toISOString(),
+    };
+  }
+}

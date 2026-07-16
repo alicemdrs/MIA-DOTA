@@ -7,11 +7,10 @@ import { AnimalsModule } from './modules/animals/animals.module';
 import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { AdoptionsModule } from './modules/adoptions/adoptions.module';
 import { VisitsModule } from './modules/visits/visits.module';
-import { GeolocationModule } from './modules/geolocation/geolocation.module';
 import { HealthModule } from './modules/health/health.module';
 
 @Module({
-  imports: [AnimalsModule, OrganizationsModule, AdoptionsModule, VisitsModule, GeolocationModule, HealthModule],
+  imports: [AnimalsModule, OrganizationsModule, AdoptionsModule, VisitsModule, HealthModule],
   controllers: [AppController],
   providers: [AppService],
 })

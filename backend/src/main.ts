@@ -13,8 +13,9 @@ const corsOrigins = (process.env.CORS_ORIGIN ?? defaultCorsOrigins)
   .filter(Boolean);
 
 app.enableCors({
-    origin: '*', // Permite que qualquer origem (como o seu frontend local) acesse a API
+    origin: corsOrigins, // Permite que qualquer origem (como o seu frontend local) acesse a API
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
   });
 
   app.useGlobalPipes(

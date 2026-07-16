@@ -378,7 +378,7 @@
     </main>
 
     <script>
-        const API_URL = 'http://localhost:3000';
+        const API_URL = 'https://mia-dota-syqr.onrender.com';
 
         // Mock inicial para quando a API não estiver conectada
         let petsArr = [
@@ -394,7 +394,7 @@
         async function carregarOrganizacoes() {
             const selectOrg = document.getElementById('petOrg');
             try {
-                const response = await fetch(`${API_URL}/organizacoes`);
+                const response = await fetch(`${API_URL}/organizations`);
                 if (response.ok) {
                     const orgs = await response.json();
                     selectOrg.innerHTML = '<option value="">Selecione uma organização...</option>';
@@ -490,7 +490,7 @@
             };
 
             try {
-                const response = await fetch(`${API_URL}/pets`, {
+                const response = await fetch(`${API_URL}/animals`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -524,7 +524,7 @@
             if (!confirm('Deseja realmente remover este animal da vitrine?')) return;
 
             try {
-                const response = await fetch(`${API_URL}/pets/${id}`, {
+                const response = await fetch(`${API_URL}/animals/${id}`, {
                     method: 'DELETE'
                 });
 

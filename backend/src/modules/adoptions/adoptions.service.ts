@@ -1,16 +1,21 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAdoptionDto } from './dto/create-adoption.dto';
 import { UpdateAdoptionDto } from './dto/update-adoption.dto';
+import { Express } from 'express';
+import  multipart from 'multer';
+
+
+type ArquivoRecebido = {
+  nomeOriginal: string;
+  tipo: string;
+  tamanho: number;
+};
+
 
 type Adoption = CreateAdoptionDto & {
   id: number;
-  animalId: number;
-  nomeAdotante: string;
-  email: string;
-  telefone: string;
-  endereco: string;
-  justificativa: string;
   status: string;
+  comprovanteIdentidade?: ArquivoRecebido;
 };
 
 @Injectable()
@@ -47,11 +52,18 @@ export class AdoptionsService {
           status: 'aprovado'
         }
     ];
-
-    criar(dados: CreateAdoptionDto) {
+  
+    criar(dados: CreateAdoptionDto, 
+      comprovante: Express.Multer.File) {
         const newAdoption: Adoption = {
             id: this.adoptions.length + 1,
             ...dados,
+            comprovanteIdentidade: {
+              nomeOriginal: comprovante.originalname,
+              tipo: comprovante.mimetype,
+              tamanho: comprovante.size,
+      },
+
         };
         this.adoptions.push(newAdoption);
         return newAdoption;

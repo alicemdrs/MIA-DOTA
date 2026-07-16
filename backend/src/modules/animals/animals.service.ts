@@ -4,13 +4,8 @@ import { UpdateAnimalDto } from './dto/update-animal.dto';
 
 type Animal = CreateAnimalDto & {
   id: number;
-  nome: string;
-  especie: string;
-  porte: string;
-  descricao: string;
-  organizationId?: number;
   dataCadastro: Date;
-  status: string;
+  status: 'Disponível' | 'Adotado';
 };
 
 @Injectable()
@@ -86,8 +81,9 @@ export class AnimalsService {
 
     criar(dados: CreateAnimalDto) {     
         const newAnimal: Animal = {
-            ...dados,
             id: this.animals.length + 1,
+            ...dados,
+            status: 'Disponível',
             dataCadastro: new Date(),
         };
         this.animals.push(newAnimal);
@@ -124,28 +120,42 @@ export class AnimalsService {
     if (indice === -1) {
       throw new NotFoundException('Animal não encontrado');
     }
-    const atualizado: Animal = { ...dados, id };
+    const atualizado: Animal = { ...dados, id, dataCadastro: this.animals[indice].dataCadastro, status: this.animals[indice].status };
     this.animals[indice] = atualizado;
     return atualizado;
   }
 
-  atualizarParcial(id: number, dados: UpdateAnimalDto) {
-    const animal = this.buscarPorId(id);
-    const atualizado: Animal = { ...animal, ...dados, id: animal.id };
+  atualizarParcial(id: number, dados: Partial<UpdateAnimalDto>) {
+        const animal = this.buscarPorId(id);
 
-    this.animals = this.animals.map((animal) => 
-        animal.id === id ? atualizado : animal
-    );
+        if (!animal) {
+            throw new NotFoundException('Animal não encontrado');
+        }
 
-    return atualizado;
-  }
+        const dadosLimpos = Object.fromEntries(
+            Object.entries(dados).filter(([, value]) => value !== undefined),
+        );
 
-  deletar(id: number) {
-    const animal = this.buscarPorId(id);
+        const atualizado = {
+            ...animal,
+            ...dadosLimpos,
+        };
 
-    this.animals = this.animals.filter((animal) => animal.id !== id);
+        this.animals = this.animals.map((animal) =>
+            animal.id === id ? atualizado : animal,
+        );
 
-    return animal;
-  }
+        return atualizado;
+    }
 
+    deletar(id: number) {
+        const animal = this.buscarPorId(id);
+    
+        this.animals = this.animals.filter((animal) => animal.id !== id);
+      
+        return animal;
+    }
+
+
+    
 }

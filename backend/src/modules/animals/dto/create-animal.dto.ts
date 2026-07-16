@@ -22,18 +22,13 @@ export class CreateAnimalDto {
     @Min(0)
     idadeAproximada!: number;
 
+    @IsNumber()
+    @IsNotEmpty()
+    organizationId!: number;
+
     @IsString()
     @IsNotEmpty()
     descricao!: string;
 
-    @IsString()
-    @IsNotEmpty()
-    status!: string;
 
-    @IsNumber()
-    @Min(1)
-    id!: number;
-
-    @IsNotEmpty()
-    dataCadastro!: Date;
 }

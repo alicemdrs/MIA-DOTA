@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const defaultCorsOrigins = 'https://mia-dota.onrender.com';
+  const defaultCorsOrigins = 'https://mia-dota-syqr.onrender.com';
 
 const corsOrigins = (process.env.CORS_ORIGIN ?? defaultCorsOrigins)
   .split(',')

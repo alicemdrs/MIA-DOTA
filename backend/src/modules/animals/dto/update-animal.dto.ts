@@ -1,5 +1,5 @@
 import {
-    IsNotEmpty,
+    IsOptional,
     IsNumber,
     IsString,
     Min,
@@ -7,33 +7,31 @@ import {
   
   export class UpdateAnimalDto {
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     nome?: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     especie?: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     porte?: string;
 
     @IsNumber()
-    @Min(0)
+    @IsOptional()
     idadeAproximada?: number;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     descricao?: string;
 
     @IsString()
-    @IsNotEmpty()
-    status?: string;
+    @IsOptional()
+    status?: 'Disponível' | 'Adotado';
 
-    @IsString()
-    @IsNotEmpty()
-    id?: string;
+    @IsNumber()
+    @IsOptional()
+    organizationId?: number;
 
-    @IsNotEmpty()
-    dataCadastro?: Date;
 }

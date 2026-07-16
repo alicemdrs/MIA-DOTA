@@ -11,7 +11,6 @@ type Adoption = CreateAdoptionDto & {
   endereco: string;
   justificativa: string;
   status: string;
-//  status: 'pendente' | 'aprovado' | 'rejeitado';
 };
 
 @Injectable()
@@ -27,7 +26,7 @@ export class AdoptionsService {
           justificativa: 'Quero um amigo para brincar', 
           status: 'pendente'
         },
-        {
+        { 
           id: 2, 
           animalId: 2, 
           nomeAdotante: 'Maria Souza', 

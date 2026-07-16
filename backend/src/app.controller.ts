@@ -9,4 +9,9 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('debug-status')
+getDebug() {
+  return { status: 'backend rodando e atualizado!' };
+}
 }

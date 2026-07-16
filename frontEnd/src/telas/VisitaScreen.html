@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Visitas - Mia Dota Admin</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f3efff 0%, #e5dbff 100%);
+            --card-bg: #ffffff;
+            --purple-primary: #9c88ff;
+            --purple-hover: #7f57ff;
+            --purple-light: #f1edff;
+            --text-main: #4a4355;
+            --text-muted: #8e8599;
+            --border-color: #e1dbe9;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f1c40f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fcfbfe;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(156, 136, 255, 0.08);
+        }
+
+        nav h1 {
+            color: var(--purple-primary);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav h1 a {
+            text-decoration: none; 
+            color: inherit; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 102px;
+            height: 92px;
+            border-radius: 90px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-tab-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-tab-link.active {
+            color: var(--purple-primary);
+            background: var(--purple-light);
+        }
+
+        .nav-tab-link:hover:not(.active) {
+            color: var(--purple-primary);
+            background: var(--purple-light);
+        }
+
+        .btn-logout {
+            background: #fff0f0;
+            color: var(--danger);
+            border: 1px solid #ffe0e0;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: #ffe3e3;
+        }
+
+        main {
+            max-width: 1000px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex-grow: 1;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .visitas-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .visita-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--warning); /* Borda padrão amarela para "Pendente" */
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Classes de status dinâmicos */
+        .visita-card.confirmada {
+            border-left-color: var(--success);
+        }
+
+        .visita-card.recusada {
+            border-left-color: var(--danger);
+            opacity: 0.7;
+        }
+
+        .visita-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.6rem;
+        }
+
+        .visita-header h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .status-pendente { background: #fef9e7; color: #f1c40f; }
+        .status-confirmado { background: #e8f8f5; color: #2ecc71; }
+        .status-recusado { background: #fdebd0; color: #e74c3c; }
+
+        .visita-info p {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .visita-info strong {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .visita-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-align: center;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .btn-action:hover {
+            opacity: 0.9;
+        }
+
+        .btn-accept { background: var(--success); color: white; }
+        .btn-reject { background: var(--danger); color: white; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>
+            <a href="vitrineScreen.html">
+                <img class="logo-img" src="../1ef274206497fe7243acd8c0c03005da.jpeg" alt="Logo Patinha">
+                Mia Dota Admin
+            </a>
+        </h1>
+        <div class="nav-links">
+            <a href="PainelScreen.html" class="nav-tab-link">Pedidos de Adoção</a>
+            <a href="VisitaScreen.html" class="nav-tab-link active">Gerenciar Visitas</a>
+            <a href="cadAnimal.html" class="nav-tab-link">Cadastrar Animais</a>
+               </div>
+    </nav>
+
+    <main>
+        <h2>Gerenciamento de Visitas Solicitadas</h2>
+        <div id="visitasContainer" class="visitas-grid">
+            <!-- Cards de visitas carregados via JS -->
+        </div>
+    </main>
+
+<script>
+        const API_URL = 'http://localhost:3000';
+
+        // Mock atualizado exatamente igual à estrutura do seu NestJS
+        let visitasArr = [
+            { id: 1, nomeVisitante: 'João Silva', telefoneVisitante: '1234567890', animalId: 1, dataVisita: '2023-06-01', horarioVisita: '10:00', criadaEm: new Date().toISOString(), status: 'pendente' },
+            { id: 2, nomeVisitante: 'Maria Souza', telefoneVisitante: '0987654321', animalId: 2, dataVisita: '2023-06-02', horarioVisita: '14:00', criadaEm: new Date().toISOString(), status: 'aprovado' }
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            carregarVisitas();
+        });
+
+        async function carregarVisitas() {
+            const container = document.getElementById('visitasContainer');
+            container.innerHTML = ''; // Limpa o container antes de renderizar
+
+            try {
+                const response = await fetch(`${API_URL}/visits`);
+                if (response.ok) {
+                    visitasArr = await response.json();
+                }
+            } catch (error) {
+                console.warn('API local offline. Carregando dados de simulação do NestJS.');
+            }
+
+            if (visitasArr.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 2rem;">Nenhuma solicitação de visita pendente.</p>';
+                return;
+            }
+
+            visitasArr.forEach(visit => {
+                // Tratando as classes e textos baseado no VisitStatus do NestJS
+                let statusClass = 'status-pendente';
+                let cardStatusClass = '';
+                let statusTexto = 'Pendente';
+
+                if (visit.status === 'aprovado') {
+                    statusClass = 'status-confirmado';
+                    cardStatusClass = 'confirmada';
+                    statusTexto = 'Aprovada';
+                } else if (visit.status === 'rejeitado') {
+                    statusClass = 'status-recusado';
+                    cardStatusClass = 'recusada';
+                    statusTexto = 'Rejeitada';
+                } else if (visit.status === 'realizada') {
+                    statusClass = 'status-confirmado'; // Usa estilo verde também
+                    cardStatusClass = 'confirmada';
+                    statusTexto = 'Realizada';
+                }
+
+                // Formatando data padrão brasileiro (DD/MM/AAAA) vinda de "dataVisita" (AAAA-MM-DD)
+                const dataFormatada = visit.dataVisita ? visit.dataVisita.split('-').reverse().join('/') : 'Data inválida';
+
+                const card = document.createElement('div');
+                card.className = `visita-card ${cardStatusClass}`;
+                card.innerHTML = `
+                    <div class="visita-header">
+                        <h3>Visitante: ${visit.nomeVisitante}</h3>
+                        <span class="status-badge ${statusClass}">${statusTexto}</span>
+                    </div>
+                    <div class="visita-info">
+                        <p><strong>ID do Pet:</strong> ${visit.animalId}</p>
+                        <p><strong>Data Proposta:</strong> ${dataFormatada} às ${visit.horarioVisita}</p>
+                        <p><strong>Telefone de Contato:</strong> ${visit.telefoneVisitante}</p>
+                    </div>
+                    <div class="visita-actions">
+                        ${visit.status === 'pendente' ? `
+                            <button class="btn-action btn-accept" onclick="atualizarStatusVisita(${visit.id}, 'aprovar')">Aprovar Visita</button>
+                            <button class="btn-action btn-reject" onclick="atualizarStatusVisita(${visit.id}, 'rejeitar')">Rejeitar</button>
+                        ` : ''}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Ação dispara diretamente as rotas de aprovação ou rejeição do NestJS
+        async function atualizarStatusVisita(id, acao) {
+            try {
+                // Dispara ex: PATCH http://localhost:3000/visits/1/aprovar ou /rejeitar
+                const response = await fetch(`${API_URL}/visits/${id}/${acao}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (response.ok) {
+                    alert(`Visita alterada com sucesso!`);
+                    carregarVisitas();
+                } else {
+                    atualizarLocalmente(id, acao);
+                }
+            } catch (error) {
+                // Fallback para simulação local se o NestJS estiver offline
+                atualizarLocalmente(id, acao);
+            }
+        }
+
+        function atualizarLocalmente(id, acao) {
+            const visit = visitasArr.find(v => v.id === id);
+            if (visit) {
+                // Converte a ação em string de status para o mock local
+                visit.status = acao === 'aprovar' ? 'aprovado' : 'rejeitado';
+                alert(`Visita atualizada localmente para: ${visit.status}!`);
+                carregarVisitas();
+            }
+        }
+
+        function handleLogout() {
+            alert('Sessão encerrada.');
+            window.location.href = 'vitrineScreen.html';
+        }
+    </script>
+</body>
+
+</html>

@@ -30,5 +30,6 @@ export class CreateAnimalDto {
     @IsNotEmpty()
     descricao!: string;
 
+   
 
 }

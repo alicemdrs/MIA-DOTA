@@ -13,8 +13,10 @@ const corsOrigins = (process.env.CORS_ORIGIN ?? defaultCorsOrigins)
   .filter(Boolean);
 
 app.enableCors({
-  origin: corsOrigins,
-  credentials: true,});
+    origin: '*', // Permite que qualquer origem (como o seu frontend local) acesse a API
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Adoção - PetMatch</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f3efff 0%, #e5dbff 100%);
+            --card-bg: #ffffff;
+            --purple-primary: #9c88ff;
+            --purple-hover: #7f57ff;
+            --purple-light: #f1edff;
+            --text-main: #4a4355;
+            --text-muted: #8e8599;
+            --border-color: #e1dbe9;
+            --success: #2ecc71;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fcfbfe;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(156, 136, 255, 0.08);
+        }
+
+        nav h1 {
+            color: var(--purple-primary);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            width: 102px;
+            height: 92px;
+           
+            border-radius: 90px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-primary);
+        }
+
+        main {
+            max-width: 600px;
+            width: 100%;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            flex-grow: 1;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(156, 136, 255, 0.06);
+            border: 1px solid rgba(156, 136, 255, 0.05);
+        }
+
+        .form-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .pet-highlight {
+            color: var(--purple-primary);
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            outline: none;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--purple-primary);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-back {
+            flex: 1;
+            padding: 0.9rem;
+            background: var(--purple-light);
+            color: var(--purple-hover);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-submit {
+            flex: 2;
+            padding: 0.9rem;
+            background: var(--purple-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: var(--purple-hover);
+        }
+
+        .btn-back:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>
+            <img class="logo-img" src="../1ef274206497fe7243acd8c0c03005da.jpeg" alt="Logo Patinha">
+            Mia Dota
+        </h1>
+        <div class="nav-links">
+            <a href="vitrineScreen.html">Vitrine</a>
+            <a href="PainelScreen.html">loginONG</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Formulário de Adoção</h2>
+                <p>Você está demonstrando interesse em adotar: <span id="petNameDisplay" class="pet-highlight">carregando...</span></p>
+            </div>
+
+            <form id="adoptionForm" onsubmit="enviarSolicitacao(event)">
+                <div class="form-group">
+                    <label for="nome">Nome Completo *</label>
+                    <input type="text" id="nome" required placeholder="Digite seu nome completo">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail de Contato *</label>
+                    <input type="email" id="email" required placeholder="exemplo@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone / WhatsApp *</label>
+                    <input type="tel" id="telefone" required placeholder="(00) 90000-0000">
+                </div>
+
+                <div class="form-group">
+                    <label for="endereco">Endereço Residencial *</label>
+                    <input type="text" id="endereco" required placeholder="Rua, Número, Bairro e Cidade">
+                </div>
+
+                <div class="form-group">
+                    <label for="motivo">Motivo da Adoção *</label>
+                    <textarea id="motivo" required placeholder="Por que você deseja adotar este bichinho? Conte um pouco sobre a rotina da casa..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <a href="vitrineScreen.html" class="btn-back">Cancelar</a>
+                    <button type="submit" class="btn-submit">Enviar Pedido de Adoção </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const API_URL = 'http://localhost:3000';
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const petId = urlParams.get('petId');
+        const petNome = decodeURIComponent(urlParams.get('petNome') || 'este pet');
+
+        window.onload = function() {
+            document.getElementById('petNameDisplay').innerText = petNome;
+        };
+
+        async function enviarSolicitacao(event) {
+            event.preventDefault(); 
+
+            const dadosPedido = {
+                animalId: petId,
+                petNome: petNome,
+                nomeAdotante: document.getElementById('nome').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                telefone: document.getElementById('telefone').value.trim(),
+                endereco: document.getElementById('endereco').value.trim(),
+                justification: document.getElementById('motivo').value.trim(),
+                dataPedido: new Date()
+            };
+
+            const token = localStorage.getItem('token');
+
+            if (token === 'mock-jwt-token-adotante' || !petId) {
+                alert("Pedido enviado com sucesso! \n\nAguarde informações no seu e-mail.");
+                window.location.href = 'vitrineScreen.html';
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_URL}/adoptions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(dadosPedido)
+                });
+
+                if(res.ok) {
+                    alert("Pedido enviado com sucesso! \n\nAguarde informações no seu e-mail.");
+                    window.location.href = 'vitrineScreen.html'; 
+                } else {
+                    const err = await res.json();
+                    alert(`Erro ao processar envio: ${err.message}`);
+                }
+            } catch (e) {
+                alert("Pedido enviado com sucesso!  (Simulação ativa)\n\nAguarde informações no seu e-mail.");
+                window.location.href = 'vitrineScreen.html';
+            }
+        }
+    </script>
+</body>
+</html>

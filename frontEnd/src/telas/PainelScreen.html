@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mia Dota - Painel Administrativo ONG</title>
+    <title>Painel Administrativo - Mia Dota</title>
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #f3efff 0%, #e5dbff 100%);
@@ -16,7 +16,6 @@
             --border-color: #e1dbe9;
             --success: #2ecc71;
             --danger: #e74c3c;
-            --warning: #f1c40f;
         }
 
         * {
@@ -30,9 +29,10 @@
             background-color: #fcfbfe;
             color: var(--text-main);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Barra de Navegação */
         nav {
             background: var(--card-bg);
             padding: 1rem 2rem;
@@ -45,406 +45,268 @@
         nav h1 {
             color: var(--purple-primary);
             font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .nav-info {
+        nav h1 a {
+            text-decoration: none; 
+            color: inherit; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 102px;
+            height: 92px;
+            border-radius: 90px;
+        }
+
+        .nav-links {
             display: flex;
             align-items: center;
             gap: 1.5rem;
         }
 
-        .user-tag {
-            font-size: 0.9rem;
-            font-weight: 600;
+        .nav-tab {
             color: var(--text-muted);
-            background: var(--purple-light);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-        }
-
-        .btn-logout {
-            background: #fff;
-            color: var(--danger);
-            border: 1px solid var(--danger);
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
+            text-decoration: none;
             font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             transition: all 0.2s;
         }
 
-        .btn-logout:hover {
-            background: var(--danger);
-            color: white;
-        }
-
-        /* Layout Grid */
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            main { grid-template-columns: 1fr; }
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 6px 18px rgba(156, 136, 255, 0.06);
-        }
-
-        .card h2 {
-            font-size: 1.4rem;
+        .nav-tab.active {
             color: var(--purple-primary);
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--purple-light);
-            padding-bottom: 0.5rem;
+            background: var(--purple-light);
         }
 
-        /* Form Cadastro de Animal (Item 5.3) */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .form-group label {
-            font-size: 0.85rem;
+        /* Estilo para a tab que funciona como link */
+        .nav-tab-link {
+            color: var(--text-muted);
+            text-decoration: none;
             font-weight: 600;
-            color: var(--text-main);
-        }
-
-        input[type="text"], select, textarea {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
             font-size: 0.95rem;
-            outline: none;
-            background: white;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--purple-primary);
-        }
-
-        textarea { height: 80px; resize: none; }
-
-        input[type="file"] {
-            padding: 0.5rem 0;
-            font-size: 0.9rem;
-        }
-
-        .btn-save {
-            padding: 0.9rem;
-            background: var(--purple-primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
             cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-tab-link:hover {
+            color: var(--purple-primary);
+            background: var(--purple-light);
+        }
+
+        .btn-logout {
+            background: #fff0f0;
+            color: var(--danger);
+            border: 1px solid #ffe0e0;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
             transition: background 0.2s;
         }
 
-        .btn-save:hover { background: var(--purple-hover); }
-
-        /* Lista de Pedidos de Adoção (Item 4) */
-        .order-item {
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            background: #faf9fc;
+        .btn-logout:hover {
+            background: #ffe3e3;
         }
 
-        .order-header {
+        main {
+            max-width: 1000px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex-grow: 1;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .pedido-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .pedido-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.6rem;
         }
 
-        .pet-name { font-weight: 700; color: var(--text-main); font-size: 1.1rem; }
-        
-        .badge-status {
-            font-size: 0.75rem;
+        .pedido-header h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .pet-tag {
+            background: var(--purple-light);
+            color: var(--purple-hover);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
             font-weight: 700;
-            padding: 0.3rem 0.6rem;
-            border-radius: 6px;
-            text-transform: uppercase;
+            font-size: 0.8rem;
         }
-        .status-solicitado { background: #fef9e7; color: var(--warning); }
-        .status-aprovado { background: #e8f8f5; color: var(--success); }
-        .status-rejeitado { background: #fdedec; color: var(--danger); }
 
-        .justification {
+        .pedido-info p {
             font-size: 0.9rem;
-            color: var(--text-muted);
-            font-style: italic;
-            background: white;
-            padding: 0.5rem;
-            border-radius: 6px;
-            border-left: 3px solid var(--purple-primary);
+            margin-bottom: 0.3rem;
         }
 
-        .order-actions {
+        .pedido-info strong {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .pedido-justificativa {
+            background: #fcfbfe;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--purple-primary);
+            color: #555;
+        }
+
+        .pedido-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 1rem;
             margin-top: 0.5rem;
         }
 
         .btn-action {
             flex: 1;
-            padding: 0.5rem;
+            padding: 0.6rem;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             font-size: 0.85rem;
-            transition: opacity 0.2s;
+            text-align: center;
+            text-decoration: none;
         }
-        .btn-action:hover { opacity: 0.9; }
+
         .btn-approve { background: var(--success); color: white; }
-        .btn-reject { background: var(--danger); color: white; }
+        .btn-whatsapp { background: #25d366; color: white; }
     </style>
 </head>
 <body>
 
     <nav>
-        <h1>🐾 Mia Dota - Painel ONG</h1>
-        <div class="nav-info">
-            <span class="user-tag" id="ongEmail">ong@teste.com</span>
-            <button class="btn-logout" onclick="logout()">Sair</button>
-        </div>
+        <h1>
+            <a href="vitrineScreen.html">
+                <img class="logo-img" src="../1ef274206497fe7243acd8c0c03005da.jpeg" alt="Logo Patinha">
+                Mia Dota Admin
+            </a>
+        </h1>
+        <div class="nav-links">
+            <div id="tabPedidos" class="nav-tab active">Pedidos de Adoção</div>
+            <!-- Redireciona diretamente para a tela de cadastro que criamos antes -->
+            <a href="cadAnimal.html" class="nav-tab-link">Cadastrar Animais</a>
+             <a href="VisitaScreen.html" class="nav-tab-link">Visitas</a>
+             </div>
     </nav>
 
     <main>
-        <!-- COLUNA 1: FORMULÁRIO DE CADASTRO (MULTIPART/UPLOAD) -->
-        <div class="card">
-            <h2>Cadastrar Novo Pet</h2>
-            <form id="petForm">
-                <div class="form-group">
-                    <label for="name">Nome do Bichinho</label>
-                    <input type="text" id="name" placeholder="Ex: Mel, Thor" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="species">Espécie</label>
-                    <select id="species" required>
-                        <option value="Cão">Cão 🐶</option>
-                        <option value="Gato">Gatos 🐱</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="size">Porte</label>
-                    <select id="size" required>
-                        <option value="PEQUENO">Pequeno</option>
-                        <option value="MEDIO">Médio</option>
-                        <option value="GRANDE">Grande</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Descrição / História</label>
-                    <textarea id="description" placeholder="Conte um pouco sobre o temperamento dele..."></textarea>
-                </div>
-
-                <!-- Campo Obrigatório de Arquivo (Item 5.3) -->
-                <div class="form-group">
-                    <label for="photo">Foto do Animal (JPEG/PNG)</label>
-                    <input type="file" id="photo" accept="image/*" required>
-                </div>
-
-                <button type="button" class="btn-save" onclick="salvarAnimal()">Cadastrar Pet 💜</button>
-            </form>
-        </div>
-
-        <!-- COLUNA 2: LISTAGEM DE ADOÇÕES (FLUXO DE NEGÓCIO) -->
-        <div class="card">
+        <section id="panelPedidos">
             <h2>Pedidos de Adoção Recebidos</h2>
-            <div id="ordersContainer">
-                <!-- Populado via Javascript -->
+            <div id="pedidosContainer">
+                <!-- Os cards de pedidos serão inseridos aqui -->
             </div>
-        </div>
+        </section>
     </main>
 
     <script>
         const API_URL = 'http://localhost:3000';
-        
-        // --- BANCO MOCK DE PROCESSOS PARA A APRESENTAÇÃO ---
-        let mockProcesses = [
-            { id: '101', adopter: 'Juliana Silva', petName: 'Pipoca', status: 'SOLICITADO', justification: 'Tenho uma casa com quintal grande e procuro um cãozinho alegre.' },
-            { id: '102', adopter: 'Lucas Souza', petName: 'Mingau', status: 'SOLICITADO', justification: 'Moro em apartamento e quero uma companhia calma para home office.' }
+
+        const mockPedidos = [
+            { _id: '101', petNome: 'Pipoca', nomeAdotante: 'João Silva', email: 'joao@email.com', telefone: '11999999999', endereco: 'Rua das Flores, 123 - SP', justification: 'Tenho uma casa grande com quintal e adoro cães!' },
+            { _id: '102', petNome: 'Mingau', nomeAdotante: 'Beatriz Costa', email: 'beatriz@email.com', telefone: '11988888888', endereco: 'Av. Paulista, 1000 - SP', justification: 'Procuro um companheiro calmo para meu apartamento.' }
         ];
 
-        window.onload = function() {
-            document.getElementById('ongEmail').innerText = localStorage.getItem('userEmail') || 'ong@teste.com';
-            loadAdoptions();
-        };
+        // Executar ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            carregarPedidos();
+        });
 
-        // --- CARREGAR PEDIDOS (GET /adoptions) ---
-        async function loadAdoptions() {
-            const container = document.getElementById('ordersContainer');
+        async function carregarPedidos() {
+            const container = document.getElementById('pedidosContainer');
             container.innerHTML = '';
 
-            const token = localStorage.getItem('token');
-
-            // Fallback imediato se for o login simulado 'mock-jwt-token-ong'
-            if (token === 'mock-jwt-token-ong') {
-                renderOrdersList(mockProcesses);
-                return;
-            }
-
             try {
-                const res = await fetch(`${API_URL}/adoptions/ong`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    renderOrdersList(data);
+                const response = await fetch(`${API_URL}/adoptions`);
+                if (response.ok) {
+                    const pedidos = await response.json();
+                    if (pedidos.length === 0) {
+                        container.innerHTML = '<p style="text-align: center; color: var(--text-muted);">Nenhum pedido recebido ainda.</p>';
+                        return;
+                    }
+                    pedidos.forEach(pedido => renderizarCardPedido(pedido, container));
                 } else {
-                    renderOrdersList(mockProcesses);
+                    usarMockPedidos(container);
                 }
-            } catch (e) {
-                renderOrdersList(mockProcesses);
+            } catch (error) {
+                console.warn('Usando dados mockados de pedidos (API Offline).');
+                usarMockPedidos(container);
             }
         }
 
-        function renderOrdersList(list) {
-            const container = document.getElementById('ordersContainer');
-            if (list.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-muted)">Nenhuma solicitação no momento.</p>';
-                return;
-            }
-
-            list.forEach(item => {
-                const statusClass = item.status.toLowerCase();
-                let actionButtons = '';
-
-                // Só exibe botões se o processo estiver pendente ('SOLICITADO')
-                if (item.status === 'SOLICITADO') {
-                    actionButtons = `
-                        <div class="order-actions">
-                            <button class="btn-action btn-approve" onclick="alterarStatus('${item.id}', 'APROVADO')">Aprovar Adoção</button>
-                            <button class="btn-action btn-reject" onclick="alterarStatus('${item.id}', 'REJEITADO')">Rejeitar</button>
-                        </div>
-                    `;
-                }
-
-                container.innerHTML += `
-                    <div class="order-item">
-                        <div class="order-header">
-                            <span class="pet-name">Pet: ${item.petName}</span>
-                            <span class="badge-status status-${statusClass}">${item.status}</span>
-                        </div>
-                        <p style="font-size: 0.9rem;"><strong>Adotante:</strong> ${item.adopter || 'Interessado'}</p>
-                        <p class="justification">"${item.justification}"</p>
-                        ${actionButtons}
-                    </div>
-                `;
-            });
+        function usarMockPedidos(container) {
+            container.innerHTML = '';
+            mockPedidos.forEach(pedido => renderizarCardPedido(pedido, container));
         }
 
-        // --- ALTERAR ESTADO DO PROCESSO (PATCH /adoptions/:id/status) ---
-        async function alterarStatus(id, novoStatus) {
-            const token = localStorage.getItem('token');
-
-            if (token === 'mock-jwt-token-ong') {
-                // Atualiza o array local em memória na hora para o professor ver mudando
-                const processo = mockProcesses.find(p => p.id === id);
-                if (processo) processo.status = novoStatus;
-                alert(`Status alterado com sucesso para ${novoStatus}!`);
-                loadAdoptions();
-                return;
-            }
-
-            try {
-                const res = await fetch(`${API_URL}/adoptions/${id}/status`, {
-                    method: 'PATCH',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ status: novoStatus })
-                });
-
-                if (res.ok) {
-                    alert(`Processo atualizado para: ${novoStatus}`);
-                    loadAdoptions();
-                } else {
-                    alert('Erro ao atualizar status.');
-                }
-            } catch (e) {
-                alert('Erro de conexão com o servidor.');
-            }
+        function renderizarCardPedido(pedido, container) {
+            const card = document.createElement('div');
+            card.className = 'pedido-card';
+            card.innerHTML = `
+                <div class="pedido-header">
+                    <h3>Adotante: ${pedido.nomeAdotante}</h3>
+                    <span class="pet-tag">Interesse: ${pedido.animalId}</span>
+                </div>
+                <div class="pedido-info">
+                    <p><strong>E-mail:</strong> ${pedido.email}</p>
+                    <p><strong>Telefone:</strong> ${pedido.telefone}</p>
+                    <p><strong>Endereço:</strong> ${pedido.endereco}</p>
+                </div>
+                <div class="pedido-justificativa">
+                    <strong>Por que quero adotar:</strong><br>
+                    "${pedido.justificativa || 'Não informada'}"
+                </div>
+                <div class="pedido-actions">
+                    <button class="btn-action btn-approve" onclick="aprovarPedido('${pedido._id}')">Aprovar Pedido</button>
+                </div>
+            `;
+            container.appendChild(card);
         }
 
-        // --- CADASTRAR ANIMAL (POST COM FILE/MULTIPART) ---
-        async function salvarAnimal() {
-            const name = document.getElementById('name').value.trim();
-            const species = document.getElementById('species').value;
-            const size = document.getElementById('size').value;
-            const description = document.getElementById('description').value.trim();
-            const photoFile = document.getElementById('photo').files[0];
-
-            if (!name || !photoFile) {
-                alert('Por favor, preencha o nome e selecione uma foto!');
-                return;
-            }
-
-            const token = localStorage.getItem('token');
-
-            // Criação do objeto FormData exigido para uploads multipart/form-data
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('species', species);
-            formData.append('size', size);
-            formData.append('description', description);
-            formData.append('photo', photoFile);
-
-            if (token === 'mock-jwt-token-ong') {
-                alert('Simulação: Animal e imagem processados com sucesso no servidor!');
-                document.getElementById('petForm').reset();
-                return;
-            }
-
-            try {
-                const res = await fetch(`${API_URL}/animals`, {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` },
-                    body: formData // O navegador configura o Content-Type e as boundaries automaticamente
-                });
-
-                if (res.ok) {
-                    alert('Pet cadastrado com sucesso!');
-                    document.getElementById('petForm').reset();
-                } else {
-                    const err = await res.json();
-                    alert(`Erro: ${err.message}`);
-                }
-            } catch (e) {
-                alert('Erro ao tentar conectar com a API NestJS.');
-            }
+        function aprovarPedido(id) {
+            alert(`Pedido ${id} aprovado com sucesso!`);
+            // Lógica para enviar alteração ao back-end pode ser adicionada aqui
         }
 
-        function logout() {
-            localStorage.clear();
-            window.location.href = 'login.html';
+        function handleLogout() {
+            alert('Sessão encerrada.');
+            window.location.href = 'vitrineScreen.html';
         }
     </script>
 </body>

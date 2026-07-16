@@ -28,9 +28,11 @@
             background-color: #fcfbfe;
             color: var(--text-main);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Barra de Navegação */
+    
         nav {
             background: var(--card-bg);
             padding: 1rem 2rem;
@@ -46,6 +48,12 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .logo-img {
+            width: 102px;
+            height: 92px;
+            border-radius: 90px;
         }
 
         .nav-links {
@@ -66,24 +74,15 @@
             color: var(--purple-primary);
         }
 
-        .btn-logout {
-            background: var(--purple-light);
-            color: var(--purple-hover);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* Conteúdo Principal */
+    
         main {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1.5rem;
+            flex-grow: 1;
         }
 
-        /* Barra de Filtros (Onde usamos o Cookie de preferência) */
+     
         .filter-bar {
             background: var(--card-bg);
             padding: 1.2rem;
@@ -116,14 +115,16 @@
             border-color: var(--purple-primary);
         }
 
-        /* Grid de Animais */
-        .pet-grid {
+       
+        /* ALINHAMENTO LADO A LADO para a vitrine E para o container de gerenciamento */
+        .pet-grid, #petsContainer {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
+            width: 100%;
         }
 
-        /* Card do Pet */
+      
         .pet-card {
             background: var(--card-bg);
             border-radius: 16px;
@@ -132,6 +133,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
 
         .pet-card:hover {
@@ -144,12 +146,16 @@
             width: 100%;
             height: 220px;
             background-color: var(--purple-light);
+            overflow: hidden;
         }
 
-        .pet-card img {
+        .pet-card img, 
+        .pet-image-container img, 
+        .pet-card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         .pet-badge {
@@ -163,6 +169,7 @@
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
+            z-index: 2;
         }
 
         .pet-info {
@@ -202,129 +209,117 @@
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
         }
 
         .btn-adopt:hover {
             background: var(--purple-hover);
         }
 
-        /* Modal de Intenção de Adoção */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            padding: 1rem;
+        /* --- ESTILOS DO RODAPÉ --- */
+        footer {
+            background-color: #1e1b24;
+            color: #f3efff;
+            padding: 3rem 1.5rem 1.5rem 1.5rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            border-top: 4px solid var(--purple-primary);
         }
 
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            max-width: 450px;
-            width: 100%;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
 
-        .modal-content h3 {
+        .footer-section h4 {
+            color: var(--purple-primary);
+            font-size: 1.2rem;
             margin-bottom: 1rem;
-            color: var(--text-main);
-        }
-
-        .modal-content textarea {
-            width: 100%;
-            height: 100px;
-            padding: 0.8rem;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            resize: none;
-            outline: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-content textarea:focus {
-            border-color: var(--purple-primary);
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-cancel {
-            flex: 1;
-            padding: 0.8rem;
-            background: var(--purple-light);
-            color: var(--purple-hover);
-            border: none;
-            border-radius: 10px;
             font-weight: 600;
-            cursor: pointer;
         }
 
-        .btn-confirm {
-            flex: 1;
-            padding: 0.8rem;
-            background: var(--success);
-            color: white;
-            border: none;
-            border-radius: 10px;
+        .footer-section p {
+            color: #d1c7bd;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section .highlight {
+            color: #ffffff;
             font-weight: 600;
-            cursor: pointer;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0 auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid #3a3545;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <h1>🐾 Mia Dota</h1>
+        <h1>
+              <a href="PainelScreen.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                <img class="logo-img" src="../1ef274206497fe7243acd8c0c03005da.jpeg" alt="Logo Patinha">
+                Mia Dota
+              </a>
+        </h1>
         <div class="nav-links">
-            <a href="vitrine.html" style="color: var(--purple-primary);">Vitrine</a>
-            <a href="meus-pedidos.html">Meus Pedidos</a>
-            <button class="btn-logout" onclick="logout()">Sair</button>
+            <a href="formVisita.html" style="color: var(--purple-primary);">Agendar Visitas</a>
         </div>
     </nav>
 
     <main>
-        <!-- Filtros com captura de Cookie -->
+        
         <div class="filter-bar">
             <h3>Filtrar por espécie:</h3>
             <select id="speciesFilter" onchange="handleFilterChange(this.value)">
                 <option value="TODOS">Todos os bichinhos</option>
-                <option value="Cão">Cães 🐶</option>
-                <option value="Gato">Gatos 🐱</option>
+                <option value="Cão">Cães</option>
+                <option value="Gato">Gatos</option>
             </select>
         </div>
 
-        <!-- Onde a mágica acontece (Lista dinâmica) -->
+        
         <div id="petGrid" class="pet-grid">
-            <!-- Mocks e dados da API entram aqui -->
+          
         </div>
     </main>
 
-    <!-- Modal do Fluxo de Negócio de Adoção -->
-    <div id="adoptModal" class="modal">
-        <div class="modal-content">
-            <h3>Solicitação de Adoção</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
-                Conte para a ONG por que você deseja adotar o(a) <strong id="modalPetName"></strong>:
-            </p>
-            <textarea id="justificationInput" placeholder="Escreva aqui sua justificativa..."></textarea>
-            <div class="modal-actions">
-                <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
-                <button class="btn-confirm" onclick="submitAdoption()">Enviar Pedido</button>
+    <footer>
+        <div class="footer-container" id="footerContainer">
+            <div class="footer-section">
+                <h4>Sobre o Mia Dota</h4>
+                <p>Conectando corações e unindo pets resgatados às suas novas famílias perfeitas.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contato da ONG</h4>
+                <p>Carregando informações de contato...</p>
+            </div>
+            <div class="footer-section">
+                <h4>Localização</h4>
+                <p>Carregando endereço de atendimento...</p>
             </div>
         </div>
-    </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mia Dota. Todos os direitos reservados. Projeto Acadêmico.</p>
+        </div>
+    </footer>
 
     <script>
         const API_URL = 'http://localhost:3000';
-        let currentSelectedPetId = null;
+        let petsArr = []; // Array global para simulações locais de pets
 
-        // --- CONTROLE DE COOKIES (Requisito 5.4) ---
         function setCookie(name, value, days) {
             const date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -338,15 +333,29 @@
             return null;
         }
 
-        // --- BANCO MOCK (Caso o back não esteja rodando na apresentação) ---
+        // Aqui você pode definir URLs diferentes no Mock se quiser testar localmente:
         const mockPets = [
-            { _id: '1', name: 'Pipoca', species: 'Cão', size: 'PEQUENO', description: 'Muito dócil, adora crianças e brincar com bolinhas.', photoUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500' },
-            { _id: '2', name: 'Mingau', species: 'Gato', size: 'MEDIO', description: 'Calmo, companheiro e adora um colinho no inverno.', photoUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500' }
+            { 
+                _id: '1', 
+                name: 'Pipoca', 
+                species: 'Cão', 
+                size: 'PEQUENO', 
+                description: 'Muito dócil, adora crianças e brincar com bolinhas.', 
+                photoUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500' // URL customizada 1
+            },
+            { 
+                _id: '2', 
+                name: 'Mingau', 
+                species: 'Gato', 
+                size: 'MEDIO', 
+                description: 'Calmo, companheiro e adora um colinho no inverno.', 
+                photoUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500' // URL customizada 2
+            }
         ];
 
-        // --- INICIALIZAÇÃO DA TELA ---
         window.onload = function() {
-            // Verifica se o usuário salvou alguma preferência de filtro em cookies anteriormente
+            loadOrganizations();
+
             const savedPreference = getCookie('pref_especie');
             if (savedPreference) {
                 document.getElementById('speciesFilter').value = savedPreference;
@@ -357,18 +366,16 @@
         };
 
         function handleFilterChange(value) {
-            setCookie('pref_especie', value, 7); // Guarda a preferência por 7 dias
+            setCookie('pref_especie', value, 7);
             loadAnimals(value);
         }
 
-        // --- RENDERIZAR OS ANIMAIS (GET) ---
         async function loadAnimals(filterValue) {
             const grid = document.getElementById('petGrid');
             grid.innerHTML = '<p>Carregando pets fofinhos...</p>';
 
             let pets = [];
 
-            // Se o token for o Mock do login rápido, usamos a lista estática simulada
             if (localStorage.getItem('token') === 'mock-jwt-token-adotante') {
                 pets = mockPets;
             } else {
@@ -376,14 +383,15 @@
                     const res = await fetch(`${API_URL}/animals`);
                     if (res.ok) pets = await res.json();
                 } catch (e) {
-                    // Fallback de segurança para a apresentação não falhar
                     pets = mockPets;
                 }
             }
 
-            // Aplica a filtragem na tela
             if (filterValue !== 'TODOS') {
-                pets = pets.filter(p => p.species.toLowerCase() === filterValue.toLowerCase());
+                pets = pets.filter(p => {
+                    const especie = p.especie || p.species || '';
+                    return especie.toLowerCase() === filterValue.toLowerCase();
+                });
             }
 
             grid.innerHTML = '';
@@ -393,72 +401,234 @@
             }
 
             pets.forEach(pet => {
+                // PRIMEIRO: Tenta usar a URL do pet. Se não existir, define o fallback dinâmico
+                let imagemExibida = pet.fotoUrl || pet.photoUrl;
+
+                if (!imagemExibida) {
+                    const especieNormalizada = (pet.especie || pet.species || '').toLowerCase();
+                    const sexoNormalizado = (pet.sexo || pet.gender || '').toLowerCase();
+
+                    if (especieNormalizada === 'gato') {
+                        if (sexoNormalizado === 'fêmea' || sexoNormalizado === 'femea') {
+                            imagemExibida = 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=300';
+                        } else {
+                            imagemExibida = 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?q=80&w=300';
+                        }
+                    } else {
+                        if (sexoNormalizado === 'fêmea' || sexoNormalizado === 'femea') {
+                            imagemExibida = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=300';
+                        } else {
+                            imagemExibida = 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=300';
+                        }
+                    }
+                }
+
                 grid.innerHTML += `
                     <div class="pet-card">
                         <div class="pet-image-container">
-                            <img src="${pet.photoUrl}" alt="${pet.name}">
-                            <span class="pet-badge">${pet.size}</span>
+                            <img src="${imagemExibida}" alt="${pet.nome || pet.name}">
+                            <span class="pet-badge">${pet.porte || pet.size}</span>
                         </div>
                         <div class="pet-info">
-                            <h2>${pet.name}</h2>
-                            <span class="pet-details">🐾 ${pet.species}</span>
-                            <p class="pet-desc">${pet.description}</p>
-                            <button class="btn-adopt" onclick="openModal('${pet._id}', '${pet.name}')">Quero Adotar 💜</button>
+                            <h2>${pet.nome || pet.name}</h2>
+                            <span class="pet-details">${pet.especie || pet.species}</span>
+                            <p class="pet-desc">${pet.descricao || pet.description}</p>
+                            <button class="btn-adopt" onclick="irParaFormulario('${pet.id || pet._id}', '${pet.nome || pet.name}')">Quero Adotar </button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // --- FLUXO DO MODAL (POST /adoptions) ---
-        function openModal(id, name) {
-            currentSelectedPetId = id;
-            document.getElementById('modalPetName').innerText = name;
-            document.getElementById('adoptModal').style.display = 'flex';
+        function irParaFormulario(id, nome) {
+            window.location.href = `formAdocao.html?petId=${id}&petNome=${encodeURIComponent(nome)}`;
         }
 
-        function closeModal() {
-            document.getElementById('adoptModal').style.display = 'none';
-            document.getElementById('justificationInput').value = '';
+        /* --- REQUISIÇÃO E RENDERIZAÇÃO DA ORGANIZAÇÃO --- */
+        async function loadOrganizations() {
+            try {
+                const response = await fetch(`${API_URL}/organizations`);
+                if (!response.ok) throw new Error('Erro ao buscar organizações');
+                
+                const orgs = await response.json();
+                
+                if (orgs && orgs.length > 0) {
+                    renderAllFooters(orgs);
+                } else {
+                    renderFallbackFooter();
+                }
+            } catch (error) {
+                console.error('Não foi possível carregar as organizações. Usando fallback.', error);
+                renderFallbackFooter();
+            }
         }
 
-        async function submitAdoption() {
-            const justification = document.getElementById('justificationInput').value.trim();
-            if(!justification) return alert('Por favor, digite uma justificativa!');
+        function renderAllFooters(orgs) {
+            const footerContainer = document.getElementById('footerContainer');
+            footerContainer.innerHTML = ""; 
+            
+            orgs.forEach(org => {
+                footerContainer.innerHTML += `
+                    <div class="footer-section">
+                        <h4>${org.nome || 'Mia Dota'}</h4>
+                        <p>CNPJ: ${org.cnpj || 'Não informado'}</p>
+                        <p>Telefone: <span class="highlight">${org.telefone || 'Não cadastrado'}</span></p>
+                        <p>E-mail: <span class="highlight">${org.email || 'Não cadastrado'}</span></p>
+                        <p>Chave Pix: <span class="highlight">${org.chavePix || 'Não cadastrada'}</span></p>
+                    </div>
+                `;
+            });
+        }
 
-            const token = localStorage.getItem('token');
+        function renderFallbackFooter() {
+            const footerContainer = document.getElementById('footerContainer');
+            footerContainer.innerHTML = `
+                <div class="footer-section">
+                    <h4>Sobre o Mia Dota</h4>
+                    <p>Conectando corações e unindo pets resgatados às suas novas famílias perfeitas.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>Telefone: <span class="highlight">(11) 99999-9999</span></p>
+                    <p>E-mail: <span class="highlight">contato@miadota.org</span></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Atendimento</h4>
+                    <p>Rua das Patinhas, 123</p>
+                    <p>São Paulo - SP</p>
+                </div>
+            `;
+        }
 
-            if (token === 'mock-jwt-token-adotante') {
-                alert('Simulação: Pedido enviado com sucesso para a ONG!');
-                closeModal();
+        async function carregarPets() {
+            const container = document.getElementById('petsContainer');
+            if(!container) return;
+            container.innerHTML = '';
+
+            try {
+                const response = await fetch(`${API_URL}/animals`);
+                if (response.ok) {
+                    petsArr = await response.json();
+                }
+            } catch (error) {
+                console.warn('Usando dados simulados para pets.');
+            }
+
+            if (petsArr.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-muted); width: 100%;">Nenhum animal cadastrado ainda.</p>';
                 return;
             }
 
+            petsArr.forEach(pet => {
+                // PRIORIZA A URL DO BANCO/FORMULÁRIO, SE NÃO TIVER USA A DE RESERVA
+                let imagemExibida = pet.fotoUrl || pet.photoUrl;
+
+                if (!imagemExibida) {
+                    const especieNormalizada = (pet.especie || '').toLowerCase();
+                    const sexoNormalizado = (pet.sexo || '').toLowerCase();
+
+                    if (especieNormalizada === 'gato') {
+                        if (sexoNormalizado === 'fêmea' || sexoNormalizado === 'femea') {
+                            imagemExibida = 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=300';
+                        } else {
+                            imagemExibida = 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?q=80&w=300';
+                        }
+                    } else {
+                        if (sexoNormalizado === 'fêmea' || sexoNormalizado === 'femea') {
+                            imagemExibida = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=300';
+                        } else {
+                            imagemExibida = 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=300';
+                        }
+                    }
+                }
+
+                const card = document.createElement('div');
+                card.className = 'pet-card';
+                card.innerHTML = `
+                    <div class="pet-image-container">
+                        <img class="pet-card-img" src="${imagemExibida}" alt="Foto de ${pet.nome}">
+                    </div>
+                    <div class="pet-card-body" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1;">
+                        <div class="pet-card-title" style="font-size: 1.3rem; font-weight: bold; color: var(--text-main);">${pet.nome}</div>
+                        <div class="pet-card-info"><strong>Espécie:</strong> ${pet.especie}</div>
+                        <div class="pet-card-info"><strong>Porte:</strong> ${pet.porte}</div>
+                        <div class="pet-card-info"><strong>Sexo:</strong> ${pet.sexo}</div>
+                        <div class="pet-card-info"><strong>Idade:</strong> ${pet.idadeEstimada}</div>
+                        <div class="pet-card-info"><strong>Status:</strong> ${pet.status}</div>
+                        <div class="pet-card-actions" style="margin-top: auto; padding-top: 1rem;">
+                            <button class="btn-pet-action btn-pet-delete" onclick="deletarPet(${pet.id || pet._id})" style="width: 100%; padding: 0.8rem; background: #e74c3c; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">Excluir</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function cadastrarPet(event) {
+            event.preventDefault();
+
+            const petData = {
+                nome: document.getElementById('petName').value,
+                especie: document.getElementById('petSpecies').value,
+                porte: document.getElementById('petSize').value,
+                sexo: document.getElementById('petGender').value,
+                idadeEstimada: document.getElementById('petAge').value,
+                dataChegada: document.getElementById('petArrivalDate').value,
+                organizacao: document.getElementById('petOrg').value,
+                status: document.getElementById('petStatus').value,
+                fotoUrl: document.getElementById('petPhoto').value, // Aqui pega o valor digitado no input do formulário!
+                descricao: document.getElementById('petDesc').value
+            };
+
             try {
-                const res = await fetch(`${API_URL}/adoptions`, {
+                const response = await fetch(`${API_URL}/pets`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ animalId: currentSelectedPetId, justification })
+                    body: JSON.stringify(petData)
                 });
 
-                if(res.ok) {
-                    alert('Pedido de adoção enviado com sucesso!');
-                    closeModal();
+                if (response.ok) {
+                    alert('Pet cadastrado com sucesso e inserido na vitrine!');
+                    document.getElementById('petForm').reset();
+                    carregarPets();
                 } else {
-                    const err = await res.json();
-                    alert(`Erro: ${err.message}`);
+                    alert('Erro ao cadastrar pet no servidor.');
                 }
-            } catch (e) {
-                alert('Erro de conexão com o servidor.');
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                const novoPet = {
+                    id: Date.now(),
+                    ...petData
+                };
+                petsArr.push(novoPet);
+                alert('Servidor indisponível. Pet adicionado à lista local de simulação.');
+                document.getElementById('petForm').reset();
+                carregarPets();
             }
         }
 
-        function logout() {
-            localStorage.clear();
-            window.location.href = 'login.html';
+        async function deletarPet(id) {
+            if (!confirm('Deseja realmente remover este animal da vitrine?')) return;
+
+            try {
+                const response = await fetch(`${API_URL}/pets/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('Pet removido com sucesso!');
+                    carregarPets();
+                } else {
+                    alert('Erro ao excluir o pet do servidor.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição de exclusão:', error);
+                petsArr = petsArr.filter(pet => (pet.id || pet._id) !== id);
+                alert('Servidor indisponível. Removido da simulação local.');
+                carregarPets();
+            }
         }
     </script>
 </body>

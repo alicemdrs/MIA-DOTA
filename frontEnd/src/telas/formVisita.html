@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento de Visitas - Mia Dota</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f3efff 0%, #e5dbff 100%);
+            --card-bg: #ffffff;
+            --purple-primary: #9c88ff;
+            --purple-hover: #7f57ff;
+            --purple-light: #f1edff;
+            --text-main: #4a4355;
+            --text-muted: #8e8599;
+            --border-color: #e1dbe9;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fcfbfe;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(156, 136, 255, 0.08);
+        }
+
+        nav h1 {
+            color: var(--purple-primary);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav h1 a {
+            text-decoration: none; 
+            color: inherit; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 102px;
+            height: 92px;
+            border-radius: 90px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-tab-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-tab-link:hover {
+            color: var(--purple-primary);
+            background: var(--purple-light);
+        }
+
+        main {
+            max-width: 600px; /* Formulário centralizado de tamanho ideal */
+            width: 100%;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            flex-grow: 1;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            outline: none;
+            font-size: 0.95rem;
+            background-color: #fff;
+        }
+
+        .form-group input:focus {
+            border-color: var(--purple-primary);
+        }
+
+        /* Linha dupla para campos menores (Data e Hora) */
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.85rem;
+            background: var(--purple-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .btn-submit:hover { 
+            background: var(--purple-hover); 
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>
+            <a href="vitrineScreen.html">
+                <img class="logo-img" src="../1ef274206497fe7243acd8c0c03005da.jpeg" alt="Logo Patinha">
+                Mia Dota
+            </a>
+        </h1>
+        <div class="nav-links">
+            <a href="vitrineScreen.html" class="nav-tab-link">Vitrine</a>
+        </div>
+    </nav>
+
+    <main>
+        <h2 class="section-title">Agendar uma Visita </h2>
+        <div class="form-card">
+            <form id="visitaForm" onsubmit="agendarVisita(event)">
+                <div class="form-group">
+                    <label for="visitanteNome">Nome Completo *</label>
+                    <input type="text" id="visitanteNome" required placeholder="Ex: Maria Souza">
+                </div>
+                
+                <div class="form-group">
+                    <label for="visitanteTelefone">Telefone / WhatsApp *</label>
+                    <input type="tel" id="visitanteTelefone" required placeholder="Ex: 11999999999">
+                </div>
+
+                <div class="form-group">
+                    <label for="visitantePet">Pet que deseja visitar *</label>
+                    <input type="text" id="visitantePet" required placeholder="Ex: Pipoca "
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="visitaData">Data da Visita *</label>
+                        <input type="date" id="visitaData" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visitaHora">Horário *</label>
+                        <input type="time" id="visitaHora" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Confirmar Agendamento </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const API_URL = 'http://localhost:3000';
+
+        async function agendarVisita(event) {
+            event.preventDefault();
+
+            const novaVisita = {
+                nome: document.getElementById('visitanteNome').value,
+                telefone: document.getElementById('visitanteTelefone').value,
+                pet: document.getElementById('visitantePet').value,
+                data: document.getElementById('visitaData').value,
+                hora: document.getElementById('visitaHora').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/visitas`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(novaVisita)
+                });
+
+                if (response.ok) {
+                    alert('Sua visita foi pré-agendada com sucesso! Entraremos em contato para confirmar. 🐾');
+                    document.getElementById('visitaForm').reset();
+                } else {
+                    alert('Erro ao enviar o agendamento.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                // Fallback para simulação local se o servidor estiver offline
+                alert('Agendamento realizado com sucesso (Simulação local)! 🎉');
+                console.log('Dados do agendamento:', novaVisita);
+                document.getElementById('visitaForm').reset();
+            }
+        }
+    </script>
+</body>
+</html>

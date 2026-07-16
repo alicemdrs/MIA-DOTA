@@ -21,6 +21,7 @@ export class AnimalsService {
          descricao: 'Um cachorro amigável e brincalhão.',
          organizationId: 1,
          dataCadastro: new Date('2023-01-15'),
+        photoUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500' 
         },
         {
          id: 2,
@@ -32,6 +33,7 @@ export class AnimalsService {
          descricao: 'Uma gata carinhosa e independente.',
          organizationId: 1,
          dataCadastro: new Date('2023-02-10'),
+         photoUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500' ,
         },
         {
          id: 3,
@@ -43,8 +45,9 @@ export class AnimalsService {
          descricao: 'Um cachorro ativo e curioso.',
          organizationId: 2,
          dataCadastro: new Date('2023-03-05'),
+         photoUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500' ,
         },
-        {
+         {
          id: 4,
          nome: 'Luna',
          especie: 'Gato',
@@ -54,6 +57,7 @@ export class AnimalsService {
          descricao: 'Uma gatinha brincalhona e afetuosa.',
          organizationId: 2,
          dataCadastro: new Date('2023-04-20'),
+         photoUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500' // <-- APAGUE ESTE LINK E COLE O SEU
         },
         {
          id: 5,
@@ -65,6 +69,7 @@ export class AnimalsService {
          descricao: 'Um cachorro leal e protetor.',
          organizationId: 3,
          dataCadastro: new Date('2023-05-12'),
+         photoUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500' // <-- APAGUE ESTE LINK E COLE O SEU
         },
         {
          id: 6,
@@ -76,6 +81,7 @@ export class AnimalsService {
          descricao: 'Uma gata elegante e independente.',
          organizationId: 3,
          dataCadastro: new Date('2023-06-08'),
+         photoUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500' // <-- APAGUE ESTE LINK E COLE O SEU
         }
     ];
 

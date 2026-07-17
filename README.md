@@ -54,15 +54,13 @@ O projeto foi desenvolvido para a disciplina de **Programação Back-end**, util
 
 ---
 
-## 🛠 Tecnologias utilizadas
+## Tecnologias utilizadas
 
 ### Back-end
 
 - NestJS
 - TypeScript
 - Node.js
-- Class Validator
-- Multer (Upload)
 - Docker
 
 ### Front-end
@@ -73,7 +71,7 @@ O projeto foi desenvolvido para a disciplina de **Programação Back-end**, util
 
 ---
 
-## 📂 Estrutura do projeto
+## Estrutura do projeto
 
 ```
 mia-dota/

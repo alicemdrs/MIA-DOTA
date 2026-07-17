@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mia Dota</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="login-page">
+    <div class="login-wrapper">
+        <div class="brand">
+            <img class="logo-img" src="assets/logo.avif" alt="Logo Mia Dota">
+            <h1>Mia Dota</h1>
+            <p>Conectando pets às famílias certas</p>
+        </div>
+
+        <div class="login-card">
+            <h2>Entrar na plataforma</h2>
+            <p class="subtitle">Simulação acadêmica — sem validação em banco de dados.</p>
+
+            <div class="profile-tabs">
+                <button type="button" class="profile-tab active" data-profile="adotante">Sou Adotante</button>
+                <button type="button" class="profile-tab" data-profile="ong">Sou ONG</button>
+            </div>
+
+            <div class="hint-box" id="hintBox">
+                <strong>Adotante:</strong> use qualquer e-mail e senha para acessar a vitrine de pets.
+            </div>
+
+            <p class="error-msg" id="errorMsg">Preencha e-mail e senha para continuar.</p>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="••••••••" autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn-login" id="btnLogin">Entrar</button>
+            </form>
+
+            <a href="vitrineScreen.html" class="guest-link" id="guestLink">Continuar sem login →</a>
+        </div>
+
+        <footer class="login-footer">
+            <p>&copy; 2026 Mia Dota. Projeto Acadêmico.</p>
+        </footer>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>

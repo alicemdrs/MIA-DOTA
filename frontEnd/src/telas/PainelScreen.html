@@ -4,310 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo - Mia Dota</title>
-    <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #f3efff 0%, #e5dbff 100%);
-            --card-bg: #ffffff;
-            --purple-primary: #9c88ff;
-            --purple-hover: #7f57ff;
-            --purple-light: #f1edff;
-            --text-main: #4a4355;
-            --text-muted: #8e8599;
-            --border-color: #e1dbe9;
-            --success: #2ecc71;
-            --danger: #e74c3c;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #fcfbfe;
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        nav {
-            background: var(--card-bg);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(156, 136, 255, 0.08);
-        }
-
-        nav h1 {
-            color: var(--purple-primary);
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        nav h1 a {
-            text-decoration: none; 
-            color: inherit; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.5rem; 
-            cursor: pointer;
-        }
-
-        .logo-img {
-            width: 102px;
-            height: 92px;
-            border-radius: 90px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .nav-tab {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .nav-tab.active {
-            color: var(--purple-primary);
-            background: var(--purple-light);
-        }
-
-        /* Estilo para a tab que funciona como link */
-        .nav-tab-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .nav-tab-link:hover {
-            color: var(--purple-primary);
-            background: var(--purple-light);
-        }
-
-        .btn-logout {
-            background: #fff0f0;
-            color: var(--danger);
-            border: 1px solid #ffe0e0;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: background 0.2s;
-        }
-
-        .btn-logout:hover {
-            background: #ffe3e3;
-        }
-
-        main {
-            max-width: 1000px;
-            width: 100%;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            flex-grow: 1;
-        }
-
-        h2 {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-main);
-        }
-
-        .pedido-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .pedido-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.6rem;
-        }
-
-        .pedido-header h3 {
-            font-size: 1.1rem;
-            color: var(--text-main);
-        }
-
-        .pet-tag {
-            background: var(--purple-light);
-            color: var(--purple-hover);
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
-
-        .pedido-info p {
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .pedido-info strong {
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .pedido-justificativa {
-            background: #fcfbfe;
-            padding: 0.8rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            border-left: 3px solid var(--purple-primary);
-            color: #555;
-        }
-
-        .pedido-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .btn-action {
-            flex: 1;
-            padding: 0.6rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.85rem;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .btn-approve { background: var(--success); color: white; }
-        .btn-whatsapp { background: #25d366; color: white; }
-    </style>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-
     <nav>
         <h1>
-            <a href="vitrineScreen.html">
-                <img class="logo-img" src="../1ef274206497fe7243acd8c0c03005da.jpeg" alt="Logo Patinha">
+            <a href="vitrineScreen.html" class="nav-brand-link">
+                <img class="logo-img" src="assets/logo.avif" alt="Logo Patinha">
                 Mia Dota Admin
             </a>
         </h1>
         <div class="nav-links">
             <div id="tabPedidos" class="nav-tab active">Pedidos de Adoção</div>
-            <!-- Redireciona diretamente para a tela de cadastro que criamos antes -->
             <a href="cadAnimal.html" class="nav-tab-link">Cadastrar Animais</a>
-             <a href="VisitaScreen.html" class="nav-tab-link">Visitas</a>
-             </div>
+            <a href="VisitaScreen.html" class="nav-tab-link">Visitas</a>
+        </div>
     </nav>
 
-    <main>
+    <main class="admin">
         <section id="panelPedidos">
             <h2>Pedidos de Adoção Recebidos</h2>
-            <div id="pedidosContainer">
-                <!-- Os cards de pedidos serão inseridos aqui -->
-            </div>
+            <div id="pedidosContainer"></div>
         </section>
     </main>
 
-    <script>
-        const API_URL = 'http://localhost:3000';
-
-        const mockPedidos = [
-            { _id: '101', petNome: 'Pipoca', nomeAdotante: 'João Silva', email: 'joao@email.com', telefone: '11999999999', endereco: 'Rua das Flores, 123 - SP', justification: 'Tenho uma casa grande com quintal e adoro cães!' },
-            { _id: '102', petNome: 'Mingau', nomeAdotante: 'Beatriz Costa', email: 'beatriz@email.com', telefone: '11988888888', endereco: 'Av. Paulista, 1000 - SP', justification: 'Procuro um companheiro calmo para meu apartamento.' }
-        ];
-
-        // Executar ao carregar a página
-        window.addEventListener('DOMContentLoaded', () => {
-            carregarPedidos();
-        });
-
-        async function carregarPedidos() {
-            const container = document.getElementById('pedidosContainer');
-            container.innerHTML = '';
-
-            try {
-                const response = await fetch(`${API_URL}/adoptions`);
-                if (response.ok) {
-                    const pedidos = await response.json();
-                    if (pedidos.length === 0) {
-                        container.innerHTML = '<p style="text-align: center; color: var(--text-muted);">Nenhum pedido recebido ainda.</p>';
-                        return;
-                    }
-                    pedidos.forEach(pedido => renderizarCardPedido(pedido, container));
-                } else {
-                    usarMockPedidos(container);
-                }
-            } catch (error) {
-                console.warn('Usando dados mockados de pedidos (API Offline).');
-                usarMockPedidos(container);
-            }
-        }
-
-        function usarMockPedidos(container) {
-            container.innerHTML = '';
-            mockPedidos.forEach(pedido => renderizarCardPedido(pedido, container));
-        }
-
-        function renderizarCardPedido(pedido, container) {
-            const card = document.createElement('div');
-            card.className = 'pedido-card';
-            card.innerHTML = `
-                <div class="pedido-header">
-                    <h3>Adotante: ${pedido.nomeAdotante}</h3>
-                    <span class="pet-tag">Interesse: ${pedido.animalId}</span>
-                </div>
-                <div class="pedido-info">
-                    <p><strong>E-mail:</strong> ${pedido.email}</p>
-                    <p><strong>Telefone:</strong> ${pedido.telefone}</p>
-                    <p><strong>Endereço:</strong> ${pedido.endereco}</p>
-                </div>
-                <div class="pedido-justificativa">
-                    <strong>Por que quero adotar:</strong><br>
-                    "${pedido.justificativa || 'Não informada'}"
-                </div>
-                <div class="pedido-actions">
-                    <button class="btn-action btn-approve" onclick="aprovarPedido('${pedido._id}')">Aprovar Pedido</button>
-                </div>
-            `;
-            container.appendChild(card);
-        }
-
-        function aprovarPedido(id) {
-            alert(`Pedido ${id} aprovado com sucesso!`);
-            // Lógica para enviar alteração ao back-end pode ser adicionada aqui
-        }
-
-        function handleLogout() {
-            alert('Sessão encerrada.');
-            window.location.href = 'vitrineScreen.html';
-        }
-    </script>
+    <script src="js/config.js"></script>
+    <script src="js/painel.js"></script>
 </body>
 </html>

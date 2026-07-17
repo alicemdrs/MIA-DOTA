@@ -1,0 +1,265 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #fcfbfe;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    background: var(--card-bg);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(156, 136, 255, 0.08);
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+nav h1 {
+    color: var(--purple-primary);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+nav h1 a,
+.nav-brand-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.logo-img {
+    width: 72px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-links a,
+.nav-tab-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.nav-links a:hover,
+.nav-tab-link:hover:not(.active) {
+    color: var(--purple-primary);
+    background: var(--purple-light);
+}
+
+.nav-tab-link {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.nav-tab-link.active,
+.nav-tab.active {
+    color: var(--purple-primary);
+    background: var(--purple-light);
+}
+
+.nav-tab {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+main {
+    max-width: 1200px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    flex-grow: 1;
+}
+
+main.narrow {
+    max-width: 600px;
+    margin-top: 3rem;
+}
+
+main.admin {
+    max-width: 1000px;
+}
+
+h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.form-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid var(--border-color);
+}
+
+.form-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-header h2 {
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    outline: none;
+    font-size: 0.95rem;
+    background-color: #fff;
+    color: var(--text-main);
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--purple-primary);
+}
+
+.form-group textarea {
+    height: 110px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+select {
+    padding: 0.6rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    outline: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    background: white;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: var(--purple-primary);
+}
+
+.btn-primary,
+.btn-submit,
+.btn-submit-pet,
+.btn-login,
+.btn-adopt {
+    background: var(--purple-primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover,
+.btn-submit:hover,
+.btn-submit-pet:hover,
+.btn-login:hover,
+.btn-adopt:hover {
+    background: var(--purple-hover);
+}
+
+.btn-back {
+    flex: 1;
+    padding: 0.9rem;
+    background: var(--purple-light);
+    color: var(--purple-hover);
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-submit {
+    flex: 2;
+    padding: 0.9rem;
+    font-size: 0.95rem;
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--text-muted);
+    width: 100%;
+}
+
+.pet-highlight {
+    color: var(--purple-primary);
+    font-weight: 700;
+}

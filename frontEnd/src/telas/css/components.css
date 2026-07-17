@@ -1,0 +1,525 @@
+/* Vitrine */
+.filter-bar {
+    background: var(--card-bg);
+    padding: 1.2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-bar h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.pet-grid,
+.pets-grid,
+#petsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.pet-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(156, 136, 255, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--border-color);
+}
+
+.pet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(156, 136, 255, 0.12);
+}
+
+.pet-image-container {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background-color: var(--purple-light);
+    overflow: hidden;
+}
+
+.pet-card img,
+.pet-image-container img,
+.pet-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.pet-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--purple-hover);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+.pet-info,
+.pet-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.pet-info h2,
+.pet-card-title {
+    font-size: 1.3rem;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.pet-details {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.pet-desc {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.pet-card-info {
+    font-size: 0.85rem;
+    color: var(--text-main);
+}
+
+.pet-card-info strong {
+    color: var(--text-muted);
+}
+
+.btn-adopt {
+    margin-top: auto;
+    width: 100%;
+    padding: 0.8rem;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 0.95rem;
+}
+
+.pet-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.btn-pet-delete {
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background-color: #1e1b24;
+    color: #f3efff;
+    padding: 3rem 1.5rem 1.5rem;
+    margin-top: 4rem;
+    font-size: 0.9rem;
+    border-top: 4px solid var(--purple-primary);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h4 {
+    color: var(--purple-primary);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.footer-section p {
+    color: #d1c7bd;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+.footer-section .highlight {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #3a3545;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* Painel - pedidos */
+.pedido-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.6rem;
+}
+
+.pedido-header h3 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.pet-tag {
+    background: var(--purple-light);
+    color: var(--purple-hover);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.pedido-info p {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    word-break: break-word;
+}
+
+.pedido-info strong {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.pedido-justificativa {
+    background: #fcfbfe;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border-left: 3px solid var(--purple-primary);
+    color: #555;
+}
+
+.pedido-actions,
+.visita-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    flex: 1;
+    min-width: 140px;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.btn-action:hover {
+    opacity: 0.9;
+}
+
+.btn-approve,
+.btn-accept {
+    background: var(--success);
+    color: white;
+}
+
+.btn-reject {
+    background: var(--danger);
+    color: white;
+}
+
+/* Visitas */
+.visitas-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.visita-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--warning);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.visita-card.confirmada {
+    border-left-color: var(--success);
+}
+
+.visita-card.recusada {
+    border-left-color: var(--danger);
+    opacity: 0.7;
+}
+
+.visita-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.6rem;
+}
+
+.visita-header h3 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.status-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.status-pendente {
+    background: #fef9e7;
+    color: #f1c40f;
+}
+
+.status-confirmado {
+    background: #e8f8f5;
+    color: #2ecc71;
+}
+
+.status-recusado {
+    background: #fdebd0;
+    color: #e74c3c;
+}
+
+.visita-info p {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.visita-info strong {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Cadastro animal */
+.cad-form-card {
+    max-width: 650px;
+    margin: 0 auto 3rem;
+    padding: 2.5rem;
+}
+
+.btn-submit-pet {
+    width: 100%;
+    padding: 0.85rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Login */
+body.login-page {
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-gradient);
+    padding: 1.5rem;
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 420px;
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.brand h1 {
+    color: var(--purple-primary);
+    font-size: 1.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.brand p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.login-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(156, 136, 255, 0.12);
+    border: 1px solid rgba(156, 136, 255, 0.08);
+}
+
+.login-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.35rem;
+}
+
+.login-card .subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.profile-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--purple-light);
+    padding: 0.35rem;
+    border-radius: 12px;
+}
+
+.profile-tab {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.profile-tab.active {
+    background: var(--card-bg);
+    color: var(--purple-primary);
+    box-shadow: 0 2px 8px rgba(156, 136, 255, 0.15);
+}
+
+.hint-box {
+    background: var(--purple-light);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.45;
+}
+
+.hint-box strong {
+    color: var(--text-main);
+}
+
+.error-msg {
+    display: none;
+    background: #fff0f0;
+    color: var(--danger);
+    border: 1px solid #ffe0e0;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.error-msg.visible {
+    display: block;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+}
+
+.btn-login:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.guest-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.25rem;
+    color: var(--purple-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.guest-link:hover {
+    text-decoration: underline;
+}
+
+.login-footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.form-adocao-card {
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(156, 136, 255, 0.06);
+}
+
+.form-adocao-card .form-group label {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-link-highlight {
+    color: var(--purple-primary) !important;
+}

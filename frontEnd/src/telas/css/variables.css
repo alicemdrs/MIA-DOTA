@@ -1,0 +1,13 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #f3efff 0%, #e5dbff 100%);
+    --card-bg: #ffffff;
+    --purple-primary: #9c88ff;
+    --purple-hover: #7f57ff;
+    --purple-light: #f1edff;
+    --text-main: #4a4355;
+    --text-muted: #8e8599;
+    --border-color: #e1dbe9;
+    --success: #2ecc71;
+    --danger: #e74c3c;
+    --warning: #f1c40f;
+}

@@ -1,98 +1,193 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# MiaDota – Sistema de Adoção Responsável de Animais
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Sobre o projeto
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+O **MiaDota** é uma aplicação Web desenvolvida com o objetivo de auxiliar o processo de adoção responsável de animais. O sistema permite o cadastro e gerenciamento de animais, organizações de proteção animal e visitas de possíveis adotantes, simulando o fluxo de adoção de forma simples e organizada.
 
-## Description
+O projeto foi desenvolvido para a disciplina de **Programação Back-end**, utilizando **NestJS** para a construção da API REST e uma interface Web em HTML, CSS e JavaScript para consumo dos serviços.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## Objetivos
 
-```bash
-$ npm install
+- Facilitar o gerenciamento de animais disponíveis para adoção.
+- Organizar visitas de interessados.
+- Demonstrar o desenvolvimento de uma API REST utilizando NestJS.
+- Aplicar boas práticas de organização em módulos, DTOs e validação de dados.
+
+---
+
+## Funcionalidades
+
+### Adoção
+- Cadastrar pedidos de adoção
+- Listar processos de adoção
+- Aprovar uma doção
+- Rejeitar uma adoção
+
+### Animais
+- Cadastrar animais
+- Listar animais cadastrados
+- Buscar animal por ID
+- Atualizar dados do animal
+- Remover animal
+
+### Organizações
+- Cadastrar organizações de proteção animal
+- Listar organizações
+- Buscar organização por ID
+- Atualizar dados
+- Remover organização
+
+### Visitas
+- Agendar visitas para conhecer um animal
+- Listar visitas
+- Buscar visita por ID
+- Atualizar informações da visita
+- Cancelar visita
+- Aprovar visita
+- Rejeitar visita
+- Concluir visita
+
+### Health Check
+- Endpoint para verificar se a API está em funcionamento.
+
+---
+
+## 🛠 Tecnologias utilizadas
+
+### Back-end
+
+- NestJS
+- TypeScript
+- Node.js
+- Class Validator
+- Multer (Upload)
+- Docker
+
+### Front-end
+
+- HTML5
+- CSS3
+- JavaScript
+
+---
+
+## 📂 Estrutura do projeto
+
+```
+mia-dota/
+│
+├── backend/
+│ ├── src/
+│ │ ├── modules/
+│ │ │ ├── animals/
+│ │ │ ├── organizations/
+│ │ │ ├── visits/
+│ │ │ └── health/
+│ │ ├── app.module.ts
+│ │ └── main.ts
+│ ├── Dockerfile
+│ └── package.json
+│
+├── frontend/
+│
+└── docker-compose.yml
 ```
 
-## Compile and run the project
+---
+
+## Executando o projeto
+
+### Instalar dependências
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
+### Executar em desenvolvimento
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Executar com Docker
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+docker compose up --build
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## API publicada
 
-Check out a few resources that may come in handy when working with NestJS:
+**Base URL**
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```
+https://mia-dota-syqr.onrender.com
+```
 
-## Support
+### Health Check
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+https://mia-dota-syqr.onrender.com/health
+```
 
-## Stay in touch
+### Endpoints principais
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+GET /adoptions
+POST /adoption
+PUT /adoptions/:id
+PATCH /adoptions/:id
+DELETE /adoptions/:id
+```
 
-## License
+```
+GET /animals
+POST /animals
+PUT /animals/:id
+PATCH /animals/:id
+DELETE /animals/:id
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```
+GET /organizations
+POST /organizations
+PUT /organizations/:id
+PATCH /organizations/:id
+DELETE /organizations/:id
+```
+
+```
+GET /visits
+POST /visits
+PUT /visits/:id
+PATCH /visits/:id
+DELETE /visits/:id
+PATCH /visits/:id/aprovar
+PATCH /visits/:id/rejeitar
+PATCH /visits/:id/concluir
+```
+
+---
+
+## Interface Web
+
+A aplicação pode ser acessada em:
+
+**Frontend**
+
+```
+https://mia-dota-front.onrender.com
+```
+
+---
+
+## Integrantes
+
+- Évelin de Souza Batista Silva (Responsável pelo backend)
+- Janyelice Viviane Dantas Soares (Responsável pelo frontend)
+- Maria Alice Medeiros Silva (Responsável pelo backend e deploy)
+
+---
